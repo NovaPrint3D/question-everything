@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Question Everything - Backing Track</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tone/14.8.26/Tone.min.js"></script>
+</head>
+<body>
+    <h1>Question Everything - Backing Track</h1>
+    <p>Generated backing track for "Question Everything"</p>
+    <button onclick="generateTrack()">Play Backing Track</button>
+    <button onclick="downloadTrack()">Download MP3</button>
+    <br>
+    <audio id="audio" controls></audio>
+    
+    <script>
+        async function generateTrack() {
+            const chords = ["Am", "F", "C", "G"];
+            const tempo = 75;
+            
+            const synth = new Tone.Synth().toDestination();
+            const now = Tone.now();
+            let time = now;
+
+            chords.forEach((chord, i) => {
+                synth.triggerAttackRelease(chord, "1n", time);
+                time += Tone.Time("1m").toSeconds() * (60 / tempo);
+            });
+
+            await Tone.start();
+            console.log("Playing backing track for 'Question Everything'...");
+        }
+        
+        function downloadTrack() {
+            alert("MP3 Download feature is coming soon!");
+        }
+    </script>
+</body>
+</html>
