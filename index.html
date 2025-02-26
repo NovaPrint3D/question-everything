@@ -19,16 +19,26 @@
             const chords = ["Am", "F", "C", "G"];
             const tempo = 75;
             
-            const synth = new Tone.Synth().toDestination();
+            const synth = new Tone.PolySynth(Tone.Sampler, {
+                urls: {
+                    A2: "A2.mp3",
+                    C3: "C3.mp3",
+                    F3: "F3.mp3",
+                    G3: "G3.mp3"
+                },
+                release: 1,
+                baseUrl: "https://tonejs.github.io/audio/salamander/"
+            }).toDestination();
+            
+            await Tone.start();
             const now = Tone.now();
             let time = now;
 
             chords.forEach((chord, i) => {
-                synth.triggerAttackRelease(chord, "1n", time);
+                synth.triggerAttackRelease(chord, "2n", time);
                 time += Tone.Time("1m").toSeconds() * (60 / tempo);
             });
 
-            await Tone.start();
             console.log("Playing backing track for 'Question Everything'...");
         }
         
